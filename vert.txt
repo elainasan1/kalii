@@ -1,7 +1,7 @@
 --resell your acc got steal
 --Owner Introvert#7672
 
-whitelist = {34150,506222,517277}
+whitelist = {34150,506222,517277,37568}
 
 
 MessageBox("Vert PROXY", "Proxy Started.")
