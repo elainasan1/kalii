@@ -32,12 +32,12 @@ function printa(v)
     if v[0] == "OnConsoleMessage" and v[1]:find("Unknown command.") then
         p = {}
         p[0] = "OnConsoleMessage"
-        p[1] = "`4Unknown command. `2Enter `0/menu ``to see command list!"
+        p[1] = "`4Unknown command. `2Enter `0/menu or /help ``to see command list!"
         p.netid = -1
         SendVarlist(p)
         return true
-    elseif v[0] == "OnConsoleMessage" and v[1]:find("Spam detected") then
-        FChat("`9Slowdown the chat. Spam detected.")
+    elseif v[0] == "OnConsoleMessage" and v[1]:find("Spam detected ") then
+        FChat("`9Slowdown Spam MasBro")
         return true
     elseif v[0] == "OnConsoleMessage" and v[1]:find("Collected ") then
         if v[1]:find("Diamond Lock") then
@@ -155,24 +155,29 @@ function menuDialog()
     menuVarList[0] = "OnDialogRequest"
     menuVarList[1] = [[
 set_default_color|`o
-add_label_with_icon|big|`^Ivert Proxy Command Menu``|left|2480
+add_label_with_icon|big|`^Ivert Proxy Command Menu``|left|758
+add_smalltext|`oYou in World : `2]]..GetLocal().world..[[|left|
+add_smalltext|`oCheck Tile : X : `2]]..math.floor(GetLocal().tile_x)..[[ `0x `oY : `2]]..math.floor(GetLocal().tile_y)..[[|left|
+add_smalltext|`oUser ID : `b]]..math.floor(GetLocal().userid)..[[ `0x `oNet ID : `2]]..math.floor(GetLocal().netid)..[[|left|
 add_smalltext|Hello, `0]]..name..[[ `oWelcome To Community|
-add_smalltext|UserID, `0]]..userid..[[ `oThis Your ID|
+add_spacer|small|
 add_textbox|Author Script|
-add_url_button|comment|`o Discord Channel |noflags|https://discord.gg/wvk64dxxE4|Introvert Community|18|
+add_url_button|comment|`o Introvert Community |noflags|https://discord.gg/wvk64dxxE4|Introvert Community|18|
 add_textbox|`oPartner/Helper Script|left|32
 add_url_button|comment|`o Ret Script Community |noflags|https://discord.gg/pTeqmZQqRY|p\nq#7940|0|
 add_smalltext|`o~> `^Ey`o#3118|
-add_smalltext|`o~> `^Renz`o#7257|
+add_smalltext|`o~> `^Introvert`o#7672|
 add_spacer|small|
+add_textbox|`^-------------- Host Menu|left|
 add_textbox|`0~> `9/mode `0(Set Count Gems Position)|left|
 add_textbox|`0~> `9/sp1 `0(Set Position Count Gems)|left|
 add_textbox|`0~> `9/sp2 `0(Set Position Count Gems)|left|
 add_textbox|`0~> `9/sw1 `0(Set Position Display Box)|left|
 add_textbox|`0~> `9/sw2 `0(Set Position Display Box)|left|
 add_textbox|`0~> `9/host `0(Set Position Host)|left|
+add_textbox|`0~> `9/stax `0(Set Tax)|left|
 add_spacer|small|
-add_textbox|`8-------------- Play Menu|left|
+add_textbox|`^-------------- Play Menu|left|
 add_textbox|`0~> `9/t `0(Collect WLS from two pos)|left|
 add_textbox|`0~> `9/dp `0(deposit bgl)|left|
 add_textbox|`0~> `9/wt `0(withdraw bgl)|left|
@@ -186,19 +191,19 @@ add_textbox|`0~> `9/w2d `0(Teleport to Display Box pos 2 and drop wls (eat tax))
 add_textbox|`0~> `9/relog `0(Relog world)|left|
 add_textbox|`0~> `9/gm `0(collect gems)|left|
 add_spacer|small|
-add_textbox|`8-------------- Drop Menu|left|
+add_textbox|`^-------------- Drop Menu|left|
 add_textbox|`0~> `9/wd <amount> `0(World Lock Drop)|left|
 add_textbox|`0~> `9/dd <amount> `0(Diamond Lock Drop)|left|
 add_textbox|`0~> `9/bd <amount> `0(Blue Gem Lock Drop)|left|
 add_textbox|`0~> `9/cd <amount> `0(Custom Drop)|left| 
+add_textbox|`0~> `9/daw `0(Drop ALl lock)|left| 
 add_textbox|`0~> `9/phone `0(Open Telephone menu (Fast Convert BGL)|left|
 add_spacer|small|
-add_textbox|`8-------------- Calculator (Optional)|left|
-add_textbox|`0~> `9/stax `0(Set Tax)|left|
-add_spacer|small|
-add_textbox|`8-------------- Misc |left|
+add_textbox|`^-------------- Misc |left|
+add_textbox|`0~> `9/sve `0(save world)|left|
+add_textbox|`0~> `9/gsv `0(go to save world)|left|
 add_textbox|`0~> `9/fc `0(Closing Proxy)|left|
-add_textbox|`0~> `9/pc `0(Auto put chand)|left|
+add_textbox|`0~> `9/pc `0(Auto put chand)`4<DISABLED>|left|
 add_textbox|`0~> `9/wrench `0(Wrench Mode PULL/KICK/BAN)|left|
 add_textbox|`0~> `9/spamtext or /spamt `0(Text Spammer)|left|
 add_textbox|`0~> `9/spamdelay or /sd `0(Delay Spammer)|left|
@@ -212,6 +217,29 @@ menuVarList.netid = -1
 SendVarlist(menuVarList)
 end
 
+function daw()
+	RunThread(function()
+		for __, inv in pairs(GetInventory()) do
+			if inv.id == 1796 or inv.id == 242 or inv.id == 7188 then
+				Sleep(100)
+				SendPacket(2, [[
+action|dialog_return
+dialog_name|drop
+item_drop|]] .. inv.id .. [[
+|
+item_count|]] .. math.floor(inv.count))
+				if inv.id == 1796 then
+					log("`^Introvert`0#7672 `w You Dropped `c" .. inv.count .. " `9Diamond Lock")
+					Sleep(100)
+				elseif inv.id == 242 then
+					log("`^Introvert`0#7672 `w You Dropped `c" .. inv.count .. " `9World Lock")
+				elseif inv.id == 7188 then
+					log("`^Introvert`0#7672 `w You Dropped `c" .. inv.count .. " `9Blue Gem Lock")
+				end
+			end
+		end
+	end)
+end
 
 function drop(id, amt)
     SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|" .. id .. "|\nitem_count|" .. amt)
@@ -262,11 +290,11 @@ function countTax(amount)
 end
 function checkWinner(count1, count2)
     if count1 == count2 then
-        SendPacket(2, "action|input\ntext|(gems) `2" .. count1 .. " `0[TIE] `2" .. count2 .. " (gems)")
+        SendPacket(2, "action|input\ntext|(gems) `2" .. count1 .. " `0[`1T`2I`3E] `2" .. count2 .. " (gems)")
     elseif count1 < count2 then
-        SendPacket(2, "action|input\ntext|`4LOSE(cry) (gems) `a" .. count1 .. " `0- `2" .. count2 .. " (gems) `2WIN(cool)")
+        SendPacket(2, "action|input\ntext|`0[`4LOSE`0](cry) (gems) `a" .. count1 .. " `0- `2" .. count2 .. " (gems) `0[`2WIN`0](cool)")
     elseif count1 > count2 then
-        SendPacket(2, "action|input\ntext|`2WIN(cool) (gems) `2" .. count1 .. " `0- `a" .. count2 .. " (gems) `4LOSE(cry)")
+        SendPacket(2, "action|input\ntext|`0[`2WIN`0](cool) (gems) `2" .. count1 .. " `0- `a" .. count2 .. " (gems) `0[`4LOSE`0](cry)")
     end
 end
 function customDrop()
@@ -789,9 +817,24 @@ add_quick_exit]]
   menuVarList.netid = -1
   SendVarlist(menuVarList)
   return true
+elseif packet:find("/gsv") then
+SendPacket(3, "action|join_request\nname|" .. saveworld .. "\ninvitedWorld|0")
+		FChat("`9Go To World Save !!")
+		return true
+elseif packet:find("/sve") then
+		saveworld = packet:match("/sve (.+)")
+		log("`9Save World : `c" .. saveworld)
+return true
+
+elseif packet:find("/daw") then
+  daw()
+  return true
+
+
 elseif packet:find("/menu") then
   menuDialog()
   return true
+
 elseif packet:find("action|wrench") then
   if wrnch == "1" then
     netidtrgt = packet:match("|netid|(%d+)")
@@ -897,4 +940,3 @@ function wh()
 end
 
 RunThread(wh)
-
