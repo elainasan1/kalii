@@ -1,7 +1,7 @@
 --resell your acc got steal
 --Owner Introvert#7672
 
-whitelist = {34150,506222,517277,37568,131385,473422,478560}
+
 
 
 MessageBox("Vert PROXY", "Proxy Started.")
@@ -28,6 +28,7 @@ startGems = 0
 endGems = 0
 collectGems = false
 pc = false
+whitelist = {34150,506222,517277,37568,131385,473422,478560,481878}
 function printa(v)
     if v[0] == "OnConsoleMessage" and v[1]:find("Unknown command.") then
         p = {}
