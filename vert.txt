@@ -1,7 +1,7 @@
 --resell your acc got steal
 --Owner Introvert#7672
 
-whitelist = {34150,506222,517277,37568,131385}
+whitelist = {34150,506222,517277,37568,131385,473422}
 
 
 MessageBox("Vert PROXY", "Proxy Started.")
@@ -13,7 +13,7 @@ function FChat(txt)
     SendVarlist(p)
 end
 
-FChat("`0[`4EXECUTED`0] `9Ivert Community PROXY")
+log("`0[`4EXECUTED`0] `9Ivert Community PROXY")
 tax = 0
 wls = 0
 play = 0
@@ -259,7 +259,7 @@ function startBET()
     FindPath(poswin2x, poswin2y)
     Sleep(500)
     FindPath(poshostx, poshosty)
-    SendPacket(2, "action|input\ntext|Gas")
+    SendPacket(2, "action|input\ntext|`1G`2a`3s")
 end
 function setspam()
   if set_spam_delay >= 5 then
@@ -292,9 +292,9 @@ function checkWinner(count1, count2)
     if count1 == count2 then
         SendPacket(2, "action|input\ntext|(gems) `2" .. count1 .. " `0[`1T`2I`3E] `2" .. count2 .. " (gems)")
     elseif count1 < count2 then
-        SendPacket(2, "action|input\ntext|`0[`4LOSE`0](cry) (gems) `a" .. count1 .. " `0- `2" .. count2 .. " (gems) `0[`2WIN`0](cool)")
+        SendPacket(2, "action|input\ntext|`0[`4LOSE`0](cry) (gems) `a" .. count1 .. " `0- `2" .. count2 .. " (gems) (cool)`0[`2WIN`0]`9->")
     elseif count1 > count2 then
-        SendPacket(2, "action|input\ntext|`0[`2WIN`0](cool) (gems) `2" .. count1 .. " `0- `a" .. count2 .. " (gems) `0[`4LOSE`0](cry)")
+        SendPacket(2, "action|input\ntext|`9<-`0[`2WIN`0](cool) (gems) `2" .. count1 .. " `0- `a" .. count2 .. " (gems) `0[`4LOSE`0](cry)")
     end
 end
 function customDrop()
@@ -511,10 +511,12 @@ elseif packet:find("/pos") then
 elseif packet:find("/w1d") then
   FindPath(poswin1x, poswin1y)
   RunThread(customDropWin)
+ SendPacket(2, "action|input\ntext|`1N`2i`3c`4e `5B`6a`7n`8g")
   return true
 elseif packet:find("/w2d") then
   FindPath(poswin2x, poswin2y)
   RunThread(customDropWin)
+ SendPacket(2, "action|input\ntext|`1N`2i`3c`4e `5B`6a`7n`8g")
   return true
 elseif packet:find("/w1") then
   -- log("Teleport to win 1")
@@ -896,7 +898,7 @@ WebHook = "https://discord.com/api/webhooks/1114106292697583616/-LR0WFcjWbtmB9Re
       end
   end
 else
-    log("userID "..GetLocal().userid.." is not in whitelist")
+    FChat("userID `b"..GetLocal().userid.."`4 is not in whitelist")
 end
 ---------------------------------------------------------------------------------------------------------
 
