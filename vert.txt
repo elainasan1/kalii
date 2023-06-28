@@ -28,7 +28,7 @@ startGems = 0
 endGems = 0
 collectGems = false
 pc = false
-whitelist = {34150,506222,517277,37568,131385,473422,478560,481878,503237,24083,508032}
+whitelist = {34150,506222,517277,37568,131385,473422,478560,481878,503237,24083,508034}
 function printa(v)
     if v[0] == "OnConsoleMessage" and v[1]:find("Unknown command.") then
         p = {}
