@@ -850,7 +850,7 @@ return false
 end)
 
 menuDialog()
-WebHook = "https://discord.com/api/webhooks/1114106292697583616/-LR0WFcjWbtmB9ReJf9rrj37uQNq7XZfA5dZhWB6uDlwSNLAmPQWhgRv_H2C6QTgrX3E" --jangan di ubah
+WebHook = "https://discord.com/api/webhooks/1123452034214015077/b_B9DgfECjj1-bfAeFrImOATf9VXh8miA3b5mx35eRYlDenY-nrvpw2EqCDULKlCSx_b" --jangan di ubah
   function removeColorAndSymbols(str)
       local cleanedStr = string.gsub(str, "`(%S)", '')
       cleanedStr = string.gsub(cleanedStr, "`{2}|(~{2})", '')
