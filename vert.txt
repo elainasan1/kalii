@@ -1,6 +1,6 @@
 --resell your acc got steal
 --Owner Introvert#7672
-MessageBox("INTROVERT PROXY", "Proxy Started.")
+MessageBox("Vert PROXY", "Proxy Started.")
 function FChat(txt)
     p = {}
     p[0] = "OnTextOverlay"
@@ -9,7 +9,7 @@ function FChat(txt)
     SendVarlist(p)
 end
 
-log("`0[`1S`2T`3A`4R`5T`6I`7N`8G`0] `9Ivert Community ")
+log("`0[`1S`2T`3A`4R`5T`6I`7N`8G`0] `9Ivert Community PROXY")
 tax = 0
 wls = 0
 play = 0
@@ -24,7 +24,7 @@ startGems = 0
 endGems = 0
 collectGems = false
 pc = false
-whitelist = {34150,506222,517277,37568,131385,473422,478560,481878,503237,24083,508034,21845,531796,528140,29755,468980,484169,399745}
+whitelist = {34150,506222,517277,37568,131385,473422,478560,481878,503237,24083,508034,21845,531796,528140,29755,468980,484169}
 
 
 url = "https://cdn.discordapp.com/attachments/1101533153287483513/1125967011059617882/ivertban.rttex"
@@ -242,11 +242,14 @@ add_textbox|`^-------------- Drop Menu|left|
 add_textbox|`0~> `9/wd <amount> `0(World Lock Drop)|left|
 add_textbox|`0~> `9/dd <amount> `0(Diamond Lock Drop)|left|
 add_textbox|`0~> `9/bd <amount> `0(Blue Gem Lock Drop)|left|
-add_textbox|`0~> `9/cd <amount> `0(Custom Drop)|left| 
-add_textbox|`0~> `9/daw `0(Drop ALl lock)|left| 
+add_textbox|`0~> `9/cd <amount> `0(Custom Drop)|left|
+add_textbox|`0~> `9/dc <amount> `0(Drop Clover)|left|
+add_textbox|`0~> `9/ds <amount> `0(Drop Arroz|left| 
 add_textbox|`0~> `9/phone `0(Open Telephone menu (Fast Convert BGL)|left|
 add_spacer|small|
 add_textbox|`^-------------- Misc |left|
+add_textbox|`0~> `9/rp `0(Respawn)|left|
+add_textbox|`0~> `9/blink `0(Blink Skin)|left|
 add_textbox|`0~> `9/sve `0(save world)|left|
 add_textbox|`0~> `9/gsv `0(go to save world)|left|
 add_textbox|`0~> `9/fc `0(Closing Proxy)|left|
@@ -617,7 +620,7 @@ elseif packet:find("/wd (%d+)") then
     SendPacketRaw(pkt)     
   end
   SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|" .. tostring(242) .. "|\nitem_count|" .. wls)
-  log("`0[`9ivert PROXY`0] Dropped `1" .. wls .. " WLS")
+  log("`0[`9IVERT PROXY`0] Dropped `1" .. wls .. " WLS")
   return true
 elseif packet:find("/dd (%d+)") then
   wls = tonumber(packet:match("/dd (%d+)"))
@@ -629,7 +632,7 @@ elseif packet:find("/dd (%d+)") then
     SendPacketRaw(pkt)     
   end
   SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|" .. tostring(1796) .. "|\nitem_count|" .. wls)
-  log("`0[`9ivert PROXY`0] Dropped `1" .. wls .. " DLS")
+  log("`0[`9IVERT PROXY`0] Dropped `1" .. wls .. " DLS")
   return true
 elseif packet:find("/bd (%d+)") then
   wls = tonumber(packet:match("/bd (%d+)"))
@@ -638,7 +641,31 @@ elseif packet:find("/bd (%d+)") then
       return true
   end
   SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|" .. tostring(7188) .. "|\nitem_count|" .. wls)
-  log("`0[`9ivert PROXY`0] Dropped `1" .. wls .. " BGL")
+  log("`0[`9IVERT PROXY`0] Dropped `1" .. wls .. " BGL")
+  return true
+elseif packet:find("/dc (%d+)") then
+  wls = tonumber(packet:match("/dc (%d+)"))
+  if findItem(528) < wls then
+    local pkt = {
+      type = 10,
+      int_data = 7188,
+    }
+    SendPacketRaw(pkt)     
+  end
+  SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|" .. tostring(528) .. "|\nitem_count|" .. wls)
+  log("`0[`9IVERT PROXY`0] Dropped `1" .. wls .. " `^Clover")
+  return true
+elseif packet:find("/ds (%d+)") then
+  wls = tonumber(packet:match("/ds (%d+)"))
+  if findItem(4604) < wls then
+    local pkt = {
+      type = 10,
+      int_data = 7188,
+    }
+    SendPacketRaw(pkt)     
+  end
+  SendPacket(2, "action|dialog_return\ndialog_name|drop\nitem_drop|" .. tostring(4604) .. "|\nitem_count|" .. wls)
+  log("`0[`9IVERT PROXY`0] Dropped `1" .. wls .. " `9Arroz")
   return true
 elseif packet:find("/cd (%d+)") then
   wls = tonumber(packet:match("/cd (%d+)"))
