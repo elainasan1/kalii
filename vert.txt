@@ -1,6 +1,6 @@
 --resell your acc got steal
 --Owner Introvert#7672
-MessageBox("Vert PROXY", "Proxy Started.")
+MessageBox("INTROVERT PROXY", "Proxy Started.")
 function FChat(txt)
     p = {}
     p[0] = "OnTextOverlay"
@@ -9,7 +9,7 @@ function FChat(txt)
     SendVarlist(p)
 end
 
-log("`0[`1S`2T`3A`4R`5T`6I`7N`8G`0] `9Ivert Community PROXY")
+log("`0[`1S`2T`3A`4R`5T`6I`7N`8G`0] `9Ivert Community ")
 tax = 0
 wls = 0
 play = 0
