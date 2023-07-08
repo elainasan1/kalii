@@ -9,7 +9,7 @@ function FChat(txt)
     SendVarlist(p)
 end
 
-log("`0[`4EXECUTED`0] `9Ivert Community PROXY")
+log("`0[`1S`2T`3A`4R`5T`6I`7N`8G`0] `9Ivert Community PROXY")
 tax = 0
 wls = 0
 play = 0
@@ -17,7 +17,7 @@ cvbgl = 0
 totalbet = 0
 wrnch = 0
 wrnch_md = ""
-set_spam_text = "Set your spam text and delay !"
+set_spam_text = "`1I`2A`3M `4G`5A`6Y
 set_spam_delay = 5
 spamming = false
 startGems = 0
