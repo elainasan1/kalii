@@ -264,6 +264,35 @@ menuVarList.netid = -1
 SendVarlist(menuVarList)
 end
 
+function blinks()
+  local skin = {
+    1685231359,
+    2022356223,
+    2190853119,
+    2527912447,
+    2864971775,
+    3033464831,
+    3370516479,
+    1348237567,
+    2749215231,
+    3317842431,
+    726390783,
+    713703935,
+    3578898943,
+    4042322175,
+    3531226367,
+    4023103999,
+    194314239,
+    1345519520
+  }
+  while blink do
+    SendPacket(2, [[
+action|setSkin
+color|]] .. skin[math.random(#skin)])
+    Sleep(600)
+  end
+end
+
 function daw()
 	RunThread(function()
 		for __, inv in pairs(GetInventory()) do
@@ -286,6 +315,18 @@ item_count|]] .. math.floor(inv.count))
 			end
 		end
 	end)
+end
+
+function place(x, y, id)
+  local pkt = {}
+  pkt.type = 3
+  pkt.flags = 2560
+  pkt.int_data = id
+  pkt.int_x = x
+  pkt.int_y = y
+  pkt.pos_x = GetLocal().pos_x
+  pkt.pos_y = GetLocal().pos_y
+  SendPacketRaw(pkt)
 end
 
 function drop(id, amt)
@@ -460,16 +501,7 @@ function customDropWin()
     Sleep(500)
     FindPath(poshostx, poshosty)
 end
-function place(id, x, y)
-    pkt = {}
-    pkt.type = 3
-    pkt.value = id
-    pkt.px = math.floor(GetLocal().pos_x / 32 + x)
-    pkt.py = math.floor(GetLocal().pos_y / 32 + y)
-    pkt.x = GetLocal().pos_x
-    pkt.y = GetLocal().pos_y
-    SendPacketRaw(false, pkt)
-end
+
 function reset()
     if Mode == "HORIZONTAL" then
         FindPath(pos1x1, pos1y1)
@@ -558,11 +590,13 @@ elseif packet:find("/pos") then
 elseif packet:find("/w1d") then
   FindPath(poswin1x, poswin1y)
   RunThread(customDropWin)
+GetLocal().facing_left = true
  SendPacket(2, "action|input\ntext|`1N`2i`3c`4e `5B`6a`7n`8g")
   return true
 elseif packet:find("/w2d") then
   FindPath(poswin2x, poswin2y)
   RunThread(customDropWin)
+GetLocal().facing_left = false
  SendPacket(2, "action|input\ntext|`1N`2i`3c`4e `5B`6a`7n`8g")
   return true
 elseif packet:find("/w1") then
@@ -866,6 +900,22 @@ add_quick_exit]]
   menuVarList.netid = -1
   SendVarlist(menuVarList)
   return true
+elseif packet:find("/blink") then
+    if blink then
+      blink = false
+FChat("`4Deactivated Blink")
+    else
+      blink = true
+FChat("`9Blink Activated")
+    end
+    RunThread(function()
+      blinks()
+    end)
+    return true
+
+elseif packet:find("/rp") then
+    SendPacket(2, "action|respawn|")
+    return trueend
 elseif packet:find("/gsv") then
 SendPacket(3, "action|join_request\nname|" .. saveworld .. "\ninvitedWorld|0")
 		FChat("`9Go To World Save !!")
